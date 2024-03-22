@@ -1,8 +1,6 @@
 {
   "name": "typescript",
   "version": "1.0.0",
-  "repository": "ssh://git@github.com/k6io/example-typescript.git",
-  "author": "Simon Aronsson <simme@k6.io>",
   "engines": {
     "node": "16 || 18"
   },
@@ -24,6 +22,10 @@
     "webpack-glob-entries": "^1.0.1"
   },
   "scripts": {
-    "bundle": "webpack"
+    "bundle": "webpack",
+    "build": "webpack --mode production",
+    "test": "k6 run ./dist/get-200-status-test.js",
+    "start": "npm run build & npm run test",
+    "test:json": "k6 run ./dist/get-200-status-test.js  --out json=result.jsonl && node jsonl-to-json.js"
   }
 }
