@@ -6,7 +6,9 @@
 npm install
 ```
 
-## Running the test
+## k6 Test
+
+### Running the test
 
 To run a test written in TypeScript, we first have to transpile the TypeScript code into JavaScript running a bundler. 
 This project uses `Babel` and `Webpack` to bundle the different files into ES modules (ESM), using its [`webpack.config.js`](./webpack.config.js) configuration.
@@ -22,6 +24,22 @@ Once that is done, we can run our script the same way we usually do, for instanc
 ```bash
 k6 run dist/get-200-status-test.js
 ```
+
+### Run the test with output
+
+To generate the json line file:
+
+```bash
+k6 run ./dist/get-200-status-test.js  --out json=result.jsonl
+```
+
+To transform the json line file into a normal json:
+
+```bash
+node jsonl-to-json.js
+```
+
+### More information
 
 **See also**
 
