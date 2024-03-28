@@ -6,9 +6,12 @@ on:
     branches:
     - main
 
+defaults:
+  run:
+    working-directory: ./k6
+
 jobs:
   k6_transpile_bundle_test:
-    working-directory: ./k6
     name: Transpile, bundle and run
     runs-on: ubuntu-latest
     strategy:
@@ -21,7 +24,8 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: npm ci
       - run: npm run bundle
+      - run: ls -la && cd dist && ls -la
       - name: Run local k6 test
         uses: grafana/k6-action@v0.2.0
         with:
-          filename: dist/get-200-status-test.js
+          filename: k6/dist/get-200-status-test.js
